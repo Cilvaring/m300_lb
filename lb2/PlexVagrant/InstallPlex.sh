@@ -1,5 +1,5 @@
-sudo apt-get -y install curl
-echo "deb http://shell.ninthgate.se/packages/debian wheezy main" | sudo tee -a /etc/apt/sources.list.d/plexmediaserver.list
-sudo curl http://shell.ninthgate.se/packages/shell.ninthgate.se.gpg.key | sudo apt-key add -
+echo "deb https://downloads.plex.tv/repo/deb public main" > /etc/apt/sources.list.d/plexmediaserver.list
+wget -q -O "-" https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -
 sudo apt-get -y update
-sudo apt-get -y install plexmediaserver
+sudo apt-get -y upgrade
+sudo apt-get -y install plexmediaserver --option=Dpkg::Options::=--force-confdef
