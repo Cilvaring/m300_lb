@@ -23,6 +23,10 @@ S. Hofer - M300 LB2
 Diese LB befasst sich mit der Kreierung einer Vagrant File.
 Das File soll einerseits eine VM von sich aus installieren und einen dazu ausgewählten Service installieren/konfigurieren. Darüber hinaus muss die VM so konfiguriert werden, dass der Service automatisch von aussen bzw. vom Host System her erreichbar ist.
 
+**Grafische Übersicht:**
+
+![image](Pics/Grafik.png)
+
 ## **2. Entscheidung** <a name="Entsch"></a>
 
 ### **2.1. Auswahl VM** <a name="AuswVM"></a>
@@ -34,11 +38,18 @@ Ich habe mich für die Erstellung einer VM mit Plex-Mediaserver entschieden. Ein
 
 ### **2.3. Notwendige Konfiguration VM** <a name="Konf"></a>
 Damit das gewünschte Vorhaben umgesetzt werden kann, müssen folgende Konfigurationen vorgenommen werden:
-- Ports
-    - 80 aussen / 8080 innen
-    - 32400 aussen / 32400 innen
 
-- Bestimmung der IP der VM (variabel, da sich die IP im lokalen Netzwerk des Hosts befinden muss)
+- Bestimmung der IP der VM (variabel, da sich die IP im lokalen Netzwerk des Hosts befinden muss)  
+Alternativ kann auch keine IP bestimmt werden. Die VM erhält dann automatisch eine IP zugewiesen. Dies könnte jedoch mit Port Forwarding ein Problem darstellen, da man die IP zuerst ausfindig machen muss.
+
+- Ports
+
+|**`Port`**|**`Wo`**|
+|----|----|
+|80|Extern|
+|8080|Intern|
+|32400|Extern|
+|32400|Intern|
 
 ### **2.4. Optionale Konfiguration VM** <a name="OptKonf"></a>
 In dieser VM werden folgende optionale Konfigurationen vorgenommen:
@@ -178,7 +189,11 @@ Nach erfolgreicher Installation wird auf dem Host ein Web Browser geöffnet.
 Die URL für den Aufruf des Plex-Mediaserver lautet wie folgt:
 
 ```
-192.168.188.123:32400/web
+http://localhost:32400/web
+
+oder
+
+IP-der-VM:32400/web
 ```
 
 Man wird auf den Plex-Mediaserver weitergeleitet. Da kann man sich anmelden oder ein Konto erstellen und mit der Konfiguration des Servers beginnen.
