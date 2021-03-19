@@ -95,13 +95,13 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-Vagrant.configure("2") do |config|  
+**Vagrant.configure("2") do |config|**  
 `Hiermit wird festgelegt, dass die VM mit dem Attribut "config" konfiguriert wird.`
 
-config.vm.box = "ubuntu/xenial64"  
+**config.vm.box = "ubuntu/xenial64"**  
 `Mit dem Attribut "config" wird nun die VM ausgewählt, welche von der Vagrant Seite direkt heruntergeladen wird.`
 
-end  
+**end**  
 `Mit dem Befehl 'end' wird Code beendet`
 
 ### **3.2. VM konfigurieren** <a name="VMkonf"></a>
@@ -120,13 +120,13 @@ config.vm.provider "virtualbox" do |v|
 end
 ```
 
-config.vm.network :forwarded_port, guest: 80, host: 8080  
+**config.vm.network :forwarded_port, guest: 80, host: 8080**  
 `Mit diesem Befehl werden die Ports 80 sowie 8080 geöffnet. Somit gelangt man über den Port 80 von aussen hin an den Port 8080 innen.`
 
-config.vm.network "forwarded_port", guest: 32400, host: 32400  
+**config.vm.network "forwarded_port", guest: 32400, host: 32400**  
 `Mit diesem Befehl wird der Port 32400 geöffnet. Somit gelangt man über den Port 32400 von aussen hin an den Port 32400 innen.`
 
-config.vm.network "private_network", ip: "192.168.56.123"  
+**config.vm.network "private_network", ip: "192.168.56.123"**  
 `Diese Zeile setzt das Netzwerk der VM auf "Privates Netzwerk" und vergibt der VM die IP 192.168.56.123.`  
 `Diese IP wurde gewählt, da standardmässig bei VirtualBox ein eigenes Netzwerk für VMs zu Verfügung gestellt wird, welches wie folgt lautet: 192.168.56.1/24.`  
 `Somit sollte der PlexMediaserver bei jeder VirtualBox vom Host aus verfügbar sein, sofern diese Einstellung belassen wurde.`
@@ -137,19 +137,19 @@ config.vm.network "private_network", ip: "192.168.56.123"
   ```
   `Setzt den Netzwerkadapter auf "Öffentliches Netzwerk" und vergibt eine IP aus dem Range des Hosts`
   
-config.vm.provider "virtualbox" do |v|  
+**config.vm.provider "virtualbox" do |v|**  
 `Hiermit wird festgelegt, dass die Eigenschaften der VM mit dem Attribut "v" konfiguriert werden.`
 
-\# v.gui = true  
+**\# v.gui = true**  
 `Dieser Befehl lässt die VM über ein GUI verwalten. Wurde jedoch auskommentiert, da es nicht notwendig ist.`
 
-v.name = "PlexVagrant"  
+**v.name = "PlexVagrant"**  
 `Dadurch erhält die VM den Namen "PlexVagrant" in Virtual Box.`
 
-v.memory = "2048"  
+**v.memory = "2048"**  
 `Hiermit wird der VM 2GB RAM zugewiesen.`
 
-end  
+**end**  
 `Mit dem Befehl 'end' wird die Konfiguration von config.vm.provider beendet`
 
 ### **3.3. Plex-Mediaserver konfigurieren** <a name="Plexkonf"></a>
@@ -160,7 +160,7 @@ Folgender Code wird verwendet, um Plex-Mediaserver auf der VM zu installieren:
 config.vm.provision :shell, :path => "InstallPlex.sh"
 ```
 
-config.vm.provision :shell, :path => "InstallPlex.sh"  
+**config.vm.provision :shell, :path => "InstallPlex.sh"**  
 `Hiermit wird der VM mitgeteilt, dass ein Shellscript ausgeführt werden soll und in welchem Pfad bzw. welchem File sich die Befehle befinden.`
 
 Shell File:
@@ -173,17 +173,17 @@ sudo apt-get -y upgrade
 sudo apt-get -y install plexmediaserver --option=Dpkg::Options::=--force-confdef
 ```
 
-echo "deb https://downloads.plex.tv/repo/deb public main" > /etc/apt/sources.list.d/plexmediaserver.list  
+**echo "deb https://downloads.plex.tv/repo/deb public main" > /etc/apt/sources.list.d/plexmediaserver.list**  
 `Mit diesem Befehl wird das Installationspaket für den Plex-Mediaserver heruntergeladen und in den abgebildeten Pfad geschrieben.`
 
-wget -q -O "-" https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -  
+**wget -q -O "-" https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -**  
 `Dadurch wird ein Key heruntergeladen  und hinzugefügt damit keine Interaktion durch den Benutzer notwendig ist, um zu bestätigen, dass die Installation von einer vertrauenswürdigen Quelle stammt.`
 
-sudo apt-get -y update  
-sudo apt-get -y upgrade  
+**sudo apt-get -y update**  
+**sudo apt-get -y upgrade**  
 `Hierdurch wird Ubuntu auf den neusten Stand gebracht.`
 
-sudo apt-get -y install plexmediaserver --option=Dpkg::Options::=--force-confdef  
+**sudo apt-get -y install plexmediaserver --option=Dpkg::Options::=--force-confdef**  
 `Mit diesem Befehl wird der Plex-Mediaserver installiert. Mit dem 'force' Befehl umgeht man die Eingabe durch einen Nutzer, um zu bestätigen, dass das Paket tatsächlich installiert werden soll.`
 
 ---
