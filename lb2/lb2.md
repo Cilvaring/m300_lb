@@ -5,7 +5,7 @@ S. Hofer - M300 LB2
 1. [Vorhaben](#Vorhaben)
 
 2. [Entscheidung](#Entsch)  
-    2.1. [Auswahl VW](#AuswVM)  
+    2.1. [Auswahl VM](#AuswVM)  
     2.2. [Auswahl Dienst](#AuswService)  
     2.3. [Notwendige Konfiguration VM](#Konf)  
     2.4. [Optionale Konfiguration VM](#OptKonf)
