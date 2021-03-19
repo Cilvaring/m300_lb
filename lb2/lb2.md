@@ -23,10 +23,6 @@ S. Hofer - M300 LB2
 Diese LB befasst sich mit der Kreierung einer Vagrant File.
 Das File soll einerseits eine VM von sich aus installieren und einen dazu ausgewählten Service installieren/konfigurieren. Darüber hinaus muss die VM so konfiguriert werden, dass der Service automatisch von aussen bzw. vom Host System her erreichbar ist.
 
-**Grafische Übersicht:**
-
-![image](Pics/Grafik.png)
-
 ## **2. Entscheidung** <a name="Entsch"></a>
 
 ### **2.1. Auswahl VM** <a name="AuswVM"></a>
@@ -50,6 +46,10 @@ Alternativ kann auch keine IP bestimmt werden. Die VM erhält dann automatisch e
 |8080|Intern|
 |32400|Extern|
 |32400|Intern|
+
+**Grafische Übersicht:**
+
+![image](Pics/Grafik.png)
 
 ### **2.4. Optionale Konfiguration VM** <a name="OptKonf"></a>
 In dieser VM werden folgende optionale Konfigurationen vorgenommen:
@@ -126,9 +126,17 @@ config.vm.network :forwarded_port, guest: 80, host: 8080
 config.vm.network "forwarded_port", guest: 32400, host: 32400  
 `Mit diesem Befehl wird der Port 32400 geöffnet. Somit gelangt man über den Port 32400 von aussen hin an den Port 32400 innen.`
 
-config.vm.network "public_network", ip: "192.168.188.123"  
-`Diese Zeile setzt das Netzwerk der VM auf "Öffentliches Netzwerk" und vergibt der VM die IP 192.168.188.123.`
+config.vm.network "private_network", ip: "192.168.56.123"  
+`Diese Zeile setzt das Netzwerk der VM auf "Privates Netzwerk" und vergibt der VM die IP 192.168.56.123.`  
+`Diese IP wurde gewählt, da standardmässig bei VirtualBox ein eigenes Netzwerk für VMs zu Verfügung gestellt wird, welches wie folgt lautet: 192.168.56.1/24.`  
+`Somit sollte der PlexMediaserver bei jeder VirtualBox vom Host aus verfügbar sein, sofern diese Einstellung belassen wurde.`
 
+- `Alternativ kann hier folgende Einstellung vorgenommen werden:`  
+  ```
+  config.vm.network "public_network", ip: "Freie-IP-in-Range-von-Host"
+  ```
+  `Setzt den Netzwerkadapter auf "Öffentliches Netzwerk" und vergibt eine IP aus dem Range des Hosts`
+  
 config.vm.provider "virtualbox" do |v|  
 `Hiermit wird festgelegt, dass die Eigenschaften der VM mit dem Attribut "v" konfiguriert werden.`
 
